@@ -1,15 +1,14 @@
 #!/usr/bin/python3
+
 from itertools import permutations
 class Solution(object):
 
     def create_hash_map(self, nums):
         mapje = {}
-        for index1 in range(len(nums)):
-            for index2 in range(len(nums)):
-                if(index1 != index2):
-                    first_number = nums[index1]
-                    second_number = nums[index2]
-                    mapje[nums[first_number]+nums[second_number]] = (index1,index2)
+        for index in range(len(nums)):
+            if (mapje.get(nums[index])==None):
+                mapje[nums[index]] = index
+        return mapje
 
     def remove_duplicates(self, sorted_list):
         new_list = []
@@ -26,27 +25,27 @@ class Solution(object):
         return new_list
                 
 
-    def threeSum(self, nums, target):
+    def threeSum(self, nums):
+        nums = self.remove_duplicates(sorted(nums))
         mapje = self.create_hash_map(nums)
-        nums = sorted(self.remove_duplicates(nums))
         three_sum = set()
-        for number in nums:
-            if(mapje.get(target - number)!= None):
-                three_sum.add(tuple(sorted([number, mapje[number][0], mapje[number][1]])))
+        for index1 in range(len(nums)):
+            for index2 in range(len(nums)):
+                if(index1<index2):
+                    first_number = nums[index1]
+                    second_number = nums[index2]
+                    sum_value = first_number + second_number
+                    sum_negative_value = -sum_value
+                    index3 = mapje.get(sum_negative_value)
+                    if (index3 != None):
+                        if(not(index1 == index3 or index2 == index3)):                            
+                            three_sum.add(tuple(sorted([sum_negative_value, first_number, second_number])))
         return [list(tuple) for tuple in three_sum]
 
 
-
-            
-
-
-
-
-        
-
 def main():
     s = Solution()
-    print(s.fourSum([1,0,-1,0,-2,2], 0))
+    print(s.threeSum([-1,0,1,2,-1,-4]))
 
 
 if(__name__=="__main__"):
