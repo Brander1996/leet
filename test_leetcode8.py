@@ -1,7 +1,7 @@
 import unittest
-from leetcode9 import Solution
+from leetcode8 import Solution
 
-class TestLeetcode9(unittest.TestCase): 
+class TestLeetcode8(unittest.TestCase): 
     def setUp(self):
         self.solution = Solution()
 

@@ -69,7 +69,6 @@ class Solution(object):
             number = -number
         return self.roundNumber(number)
 
-          
 
 def main():
     s = Solution()
