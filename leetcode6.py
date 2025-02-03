@@ -11,10 +11,12 @@ class Solution(object):
 
 
     def nextZigZagCoordinatites(self, coordinatines, numRows):
-        if(coordinatines[0] == numRows - 1 ):
-            return(coordinatines[0] - 1, coordinatines[1] + 1)
+        if(coordinatines[1]//(numRows-1) != 0 or coordinatines[0] == numRows):
+            return (coordinatines[0] + 1, coordinatines[1] - 1 ) 
+        else:
+            return (coordinatines[0], coordinatines[1] + 1)
+
+        
 
 
-
-something
         
