@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-from  coordinate import Coordinate
 class Solution(object):
 
     def convert(self, string, numRows):
@@ -8,8 +7,7 @@ class Solution(object):
         listOfLinkedElements = self.linkLettersToCoordinates(string, numRows)
         if(listOfLinkedElements == [""]):
             return listOfLinkedElements
-        newlistOfLinkedElements = [(letter, (coordinate.getX(), coordinate.getY())) for letter, coordinate in listOfLinkedElements]
-        sortedOnXandYcord = sorted(newlistOfLinkedElements, key = lambda x : (x[1][0],x[1][0]))
+        sortedOnXandYcord = sorted(listOfLinkedElements, key = lambda x : (x[1][0],x[1][0]))
         answer = ""
         for letter, coordinate in sortedOnXandYcord:
             answer = answer + letter
@@ -19,22 +17,22 @@ class Solution(object):
 
 
 
-    def nextZigZagCoordinates(self, coordinate: Coordinate, numRows):
-        if(coordinate.getY()%(numRows-1) != 0 or coordinate.getX() == numRows - 1):
-            return Coordinate(coordinate.getX() - 1, coordinate.getY() + 1 ) 
+    def nextZigZagCoordinates(self, coordinate, numRows):
+        if(coordinate[1]%(numRows-1) != 0 or coordinate[0] == numRows - 1):
+            return (coordinate[0] - 1, coordinate[1] + 1 ) 
         else:
-            return Coordinate(coordinate.getX() + 1 , coordinate.getY())
+            return (coordinate[0] + 1 , coordinate[1])
 
         
 
 
-    def linkLettersToCoordinates(self, string, numRows) -> list[tuple[str, Coordinate]]:
+    def linkLettersToCoordinates(self, string, numRows) -> list[tuple[str, tuple]]:
         listOfLinkedElements = []
         if(len(string)<= 0):
             return [""]
         first_letter = string[0]   
         current_intdex = 1
-        currentCoordinate = Coordinate(0,0)
+        currentCoordinate = (0,0)
         listOfLinkedElements.append((string[0],currentCoordinate))
         stringLength = len(string)
         while(current_intdex < stringLength):
@@ -48,7 +46,7 @@ class Solution(object):
         
 def main():
     s = Solution()
-    result = s.convert("AB", 1)
+    result = s.convert("ABCDE", 3)
     print(result)
 
 
